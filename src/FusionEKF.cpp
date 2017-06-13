@@ -39,12 +39,22 @@ FusionEKF::FusionEKF() {
   H_laser_ << 1, 0, 0, 0,
          0, 1, 0, 0;
 
+  //from lesson 5 section 13
 	ekf_.P_ = MatrixXd(4, 4);
 	ekf_.P_ << 1, 0, 0, 0,
 			  0, 1, 0, 0,
 			  0, 0, 1000, 0,
 			  0, 0, 0, 1000;
 
+  //from lesson 5 section 13
+	ekf_.F_ = MatrixXd(4, 4);
+  ekf_.F_ << 1, 0, 1, 0,
+			  0, 1, 0, 1,
+			  0, 0, 1, 0,
+			  0, 0, 0, 1;
+
+  noise_ax = 9; //lesson 5/section 13 quiz sets it to 5.
+  noise_ay = 9;
 }
 
 /**

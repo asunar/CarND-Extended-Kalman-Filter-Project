@@ -170,7 +170,6 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
     ekf_.H_ = H_laser_;
     ekf_.R_ = R_laser_;
 
-    std::cout << "Updating..."<< std::endl;
     ekf_.Update(measurement_pack.raw_measurements_);
 
   }

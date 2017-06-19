@@ -65,7 +65,6 @@ int main()
     	  // reads first element from the current line
     	  string sensor_type;
     	  iss >> sensor_type;
-         std::cout << "Received sensor measurement:"<< sensor_type<< endl;
 
     	  if (sensor_type.compare("L") == 0) {
       	  		meas_package.sensor_type_ = MeasurementPackage::LASER;
@@ -126,10 +125,8 @@ int main()
     	  
     	  estimations.push_back(estimate);
 
-        std::cout << "Calculating  RMSE:"<< sensor_type << endl;
     	  VectorXd RMSE = tools.CalculateRMSE(estimations, ground_truth);
         
-        std::cout << "Calculated RMSE:"<< sensor_type << endl;
           json msgJson;
           msgJson["estimate_x"] = p_x;
           msgJson["estimate_y"] = p_y;
@@ -139,6 +136,7 @@ int main()
           msgJson["rmse_vy"] = RMSE(3);
           auto msg = "42[\"estimate_marker\"," + msgJson.dump() + "]";
 
+          std::cout << "Timestamp: " << timestamp << std::endl;
           std::cout << msg << std::endl;
           ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
 	  
